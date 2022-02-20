@@ -21,12 +21,17 @@ var fight = function(enemy) {
      // if yes (true), leave fight
      if (confirmSkip) {
         window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-        // subtract money from playerInfo.money for skipping
-        playerInfo.money = (Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money", playerInfo.money)
-        break;
-      }
+       // subtract money from playerMoney for skipping, but don't let them go into the negative
+        playerInfo.money = Math.max(0, playerInfo.money - 10);
+       // stop while() loop using break; and enter next fight
+
+      // return true if player wants to leave
+      return true;
     }
+  }
+  return false;
+};
+
 
     // generate random damage value based on player's attack power
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -165,13 +170,25 @@ var shop = function() {
   }
 };
 
+// function to set name
+var getPlayerName = function() {
+  var name = "";
+
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+
+  console.log("Your robot's name is " + name);
+  return name;
+};
+
 /* END GAME FUNCTION */
 
 /* GAME INFORMATION / VARIABLES */
 
 // player information
 var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
+  name: window.getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
